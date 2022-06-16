@@ -1,23 +1,27 @@
-let playerScore = 0;
-let computerScore = 0;
 
-function getComputerSelection(){
-  let computerNumber = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
-  let computerChoice = "";
-  if (computerNumber == 1){
-    computerChoice = "rock";
-  } else if (computerNumber == 2){
-    computerChoice = "paper";
-  } else{
-    computerChoice = "scissors";
+function computerPlay() {
+  const choice = ['rock', 'paper', 'scissors'];
+  return choice[Math.floor(Math.random() * choice.length)];
+}
+
+
+function playRound(playerSelection, computerSelection){
+  playerSelection = prompt('Rock, paper or scissor?').toLowerCase()
+  computerSelection = computerPlay()
+  if (
+    (playerSelection === "rock" && computerSelection === "scissors")||
+    (playerSelection === "paper" && computerSelection === "rock") ||
+    (playerSelection === "scissors" && computerSelection === "paper")
+  ){
+    return `You win! ${playerSelection} beats ${computerSelection}`
   }
-  return computerChoice
+  else if (computerSelection === playerSelection){
+    return "You Tied!"
+  }
+  else{
+    return `You Lose! ${computerSelection} beats ${playerSelection}`
+  }
 }
-console.log(getComputerSelection());
 
-function getPlayerSelection(){
-  playerChoice = prompt("Rock, Paper or Scissors?");
-  playerChoice = playerChoice.toLowerCase();
-  return playerChoice
-}
-console.log(getPlayerSelection())
+
+console.log(playRound())
